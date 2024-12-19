@@ -2,6 +2,7 @@ package com.practice.Sandbox.security;
 
 import com.practice.Sandbox.security.filter.AuthenticationFilter;
 import com.practice.Sandbox.security.filter.ExceptionHandlerFilter;
+import com.practice.Sandbox.security.manager.CustomAuthenticationManager;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +14,8 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @AllArgsConstructor
 public class SecurityConfig {
+
+  CustomAuthenticationManager customAuthenticationManager;
 
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
