@@ -1,6 +1,7 @@
 package com.practice.Sandbox.security;
 
 import com.practice.Sandbox.security.filter.AuthenticationFilter;
+import com.practice.Sandbox.security.filter.ExceptionHandlerFilter;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,6 +28,7 @@ public class SecurityConfig {
             .requestMatchers("user/signup").permitAll()
             .anyRequest().authenticated()
         )
+        .addFilterBefore(new ExceptionHandlerFilter(), AuthenticationFilter.class)
         .addFilter(authenticationFilter)
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
     return http.build();
