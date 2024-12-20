@@ -16,6 +16,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import com.auth0.jwt.JWT;
 import java.io.IOException;
+import java.util.Date;
 
 
 @AllArgsConstructor
@@ -41,5 +42,12 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
         .withExpiresAt(new Date(System.currentTimeMillis() + SecurityConstants.TOKEN_EXPIRATION))
         .sign(Algorithm.HMAC512(SecurityConstants.SECRET_KEY));
     response.addHeader(SecurityConstants.AUTHORIZATION, SecurityConstants.BEARER + token);
+  }
+
+  @Override
+  protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
+    response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+    response.getWriter().write(failed.getMessage());
+    response.getWriter().flush();
   }
 }
