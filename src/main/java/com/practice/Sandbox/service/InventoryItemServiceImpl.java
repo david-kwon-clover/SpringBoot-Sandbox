@@ -38,7 +38,7 @@ public class InventoryItemServiceImpl implements InventoryItemService {
     return inventoryItemRepository.findById(id)
         .map(existingItem -> {
           existingItem.setName(inventoryItem.getName());
-          existingItem.setImgUrl(inventoryItem.getImgUrl());
+          existingItem.setImageUrl(inventoryItem.getImageUrl());
           existingItem.setQuantity(inventoryItem.getQuantity());
           existingItem.setUnitPrice(inventoryItem.getUnitPrice());
           existingItem.setCategory(inventoryItem.getCategory());

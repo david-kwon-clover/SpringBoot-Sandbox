@@ -3,6 +3,8 @@ package com.practice.Sandbox.entity;
 import com.practice.Sandbox.entity.constants.OrderStatus;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -23,7 +25,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Entity
-@Table(name = "order")
+@Table(name = "orders")
 public class Order {
 
   @Id
@@ -44,6 +46,7 @@ public class Order {
   @NotNull(message = "order status cannot be blank")
   @NonNull
   @Column(name = "order_status")
+  @Enumerated(EnumType.STRING)
   private OrderStatus orderStatus;
 
   @NotNull(message = "total cannot be null")
