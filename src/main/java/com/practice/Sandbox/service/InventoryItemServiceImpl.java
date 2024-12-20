@@ -26,6 +26,11 @@ public class InventoryItemServiceImpl implements InventoryItemService {
     return (List<InventoryItem>)inventoryItemRepository.findAll();
   }
 
+  @Override
+  public InventoryItem saveInventoryItem(InventoryItem inventoryItem) {
+    return inventoryItemRepository.save(inventoryItem);
+  }
+
   static InventoryItem unwrapInventoryItem(Optional<InventoryItem> entity, Long id) {
     if(entity.isPresent()) {
       return entity.get();
