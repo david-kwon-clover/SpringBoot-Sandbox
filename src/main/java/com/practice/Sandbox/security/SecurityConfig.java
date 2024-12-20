@@ -16,7 +16,6 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
   CustomAuthenticationManager customAuthenticationManager;
-  JWTAuthorizationFilter jwtAuthorizationFilter;
 
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -35,7 +34,7 @@ public class SecurityConfig {
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .addFilterBefore(new ExceptionHandlerFilter(), AuthenticationFilter.class)
         .addFilter(authenticationFilter)
-        .addFilterAfter(jwtAuthorizationFilter, AuthenticationFilter.class);
+        .addFilterAfter(new JWTAuthorizationFilter(), AuthenticationFilter.class);
     return http.build();
   }
 }
