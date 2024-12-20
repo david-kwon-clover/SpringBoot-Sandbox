@@ -43,12 +43,10 @@ public class InventoryItem {
   private String imgUrl;
 
   @NotNull(message = "quantity cannot be blank")
-  @NonNull
   @Column(name = "quantity")
   private int quantity;
 
   @NotNull(message = "unit price cannot be null")
-  @NonNull
   @DecimalMin(value = "0.01", message = "Unit price must be at least 0.01")
   @Column(name = "unitPrice")
   private BigDecimal unitPrice;
