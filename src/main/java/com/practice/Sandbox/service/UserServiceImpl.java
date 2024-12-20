@@ -1,6 +1,7 @@
 package com.practice.Sandbox.service;
 
 import com.practice.Sandbox.entity.User;
+import com.practice.Sandbox.exception.EntityNotFoundException;
 import com.practice.Sandbox.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -24,14 +25,14 @@ public class UserServiceImpl implements UserService {
   @Override
   public User getUserByUsername(String username) {
     Optional<User> user = userRepository.findByUsername(username);
-
+    return unwrapUser(user, 404L);
   }
 
   static User unwrapUser(Optional<User> entity, Long id) {
     if(entity.isPresent()) {
       return entity.get();
     } else {
-
+      throw new EntityNotFoundException(id, User.class);
     }
   }
 }
