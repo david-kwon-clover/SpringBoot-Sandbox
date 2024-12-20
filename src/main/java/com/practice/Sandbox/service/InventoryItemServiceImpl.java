@@ -6,6 +6,7 @@ import com.practice.Sandbox.repository.InventoryItemRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -18,6 +19,11 @@ public class InventoryItemServiceImpl implements InventoryItemService {
   public InventoryItem getInventoryItemById(Long id) {
     Optional<InventoryItem> inventoryItem = inventoryItemRepository.findById(id);
     return unwrapInventoryItem(inventoryItem, id);
+  }
+
+  @Override
+  public List<InventoryItem> getInventoryItems() {
+    return (List<InventoryItem>)inventoryItemRepository.findAll();
   }
 
   static InventoryItem unwrapInventoryItem(Optional<InventoryItem> entity, Long id) {
