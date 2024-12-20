@@ -2,7 +2,6 @@ package com.practice.Sandbox.controller;
 
 import com.practice.Sandbox.entity.InventoryItem;
 import com.practice.Sandbox.service.InventoryItemService;
-import com.practice.Sandbox.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -42,6 +42,10 @@ public class InventoryItemController {
   }
 
   // update by id
+  @PutMapping("/{id}")
+  public ResponseEntity<InventoryItem> updateInventoryItem(@PathVariable Long id, @RequestBody InventoryItem inventoryItem) {
+    return new ResponseEntity<>(inventoryItemService.updateInventoryItem(id, inventoryItem), HttpStatus.OK);
+  }
 
   // delete
   @DeleteMapping("/{id}")

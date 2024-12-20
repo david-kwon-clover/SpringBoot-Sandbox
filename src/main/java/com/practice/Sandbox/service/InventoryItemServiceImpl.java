@@ -7,6 +7,7 @@ import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,6 +31,21 @@ public class InventoryItemServiceImpl implements InventoryItemService {
   @Override
   public InventoryItem saveInventoryItem(InventoryItem inventoryItem) {
     return inventoryItemRepository.save(inventoryItem);
+  }
+
+  @Override
+  public InventoryItem updateInventoryItem(Long id, InventoryItem inventoryItem) {
+    return inventoryItemRepository.findById(id)
+        .map(existingItem -> {
+          existingItem.setName(inventoryItem.getName());
+          existingItem.setImgUrl(inventoryItem.getImgUrl());
+          existingItem.setQuantity(inventoryItem.getQuantity());
+          existingItem.setUnitPrice(inventoryItem.getUnitPrice());
+          existingItem.setCategory(inventoryItem.getCategory());
+          existingItem.setUpdatedAt(LocalDateTime.now());
+          return inventoryItemRepository.save(existingItem);
+        })
+        .orElseThrow(() -> new EntityNotFoundException(id, InventoryItem.class));
   }
 
   @Override
