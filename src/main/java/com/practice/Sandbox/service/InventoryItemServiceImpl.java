@@ -3,6 +3,7 @@ package com.practice.Sandbox.service;
 import com.practice.Sandbox.entity.InventoryItem;
 import com.practice.Sandbox.exception.EntityNotFoundException;
 import com.practice.Sandbox.repository.InventoryItemRepository;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +33,7 @@ public class InventoryItemServiceImpl implements InventoryItemService {
   }
 
   @Override
+  @Transactional
   public void deleteInventoryItem(Long id) {
     inventoryItemRepository.deleteById(id);
   }
