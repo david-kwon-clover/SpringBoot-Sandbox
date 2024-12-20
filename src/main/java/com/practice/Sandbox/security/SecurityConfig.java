@@ -2,6 +2,7 @@ package com.practice.Sandbox.security;
 
 import com.practice.Sandbox.security.filter.AuthenticationFilter;
 import com.practice.Sandbox.security.filter.ExceptionHandlerFilter;
+import com.practice.Sandbox.security.filter.JWTAuthorizationFilter;
 import com.practice.Sandbox.security.manager.CustomAuthenticationManager;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -15,6 +16,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
   CustomAuthenticationManager customAuthenticationManager;
+  JWTAuthorizationFilter jwtAuthorizationFilter;
 
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -32,7 +34,8 @@ public class SecurityConfig {
         )
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .addFilterBefore(new ExceptionHandlerFilter(), AuthenticationFilter.class)
-        .addFilter(authenticationFilter);
+        .addFilter(authenticationFilter)
+        .addFilterAfter(jwtAuthorizationFilter, AuthenticationFilter.class);
     return http.build();
   }
 }
