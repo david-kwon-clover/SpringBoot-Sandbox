@@ -9,4 +9,5 @@ public interface InventoryItemService {
   InventoryItem getInventoryItemById(Long id);
   List<InventoryItem> getInventoryItems();
   InventoryItem saveInventoryItem(InventoryItem inventoryItem);
+  void deleteInventoryItem(Long id);
 }

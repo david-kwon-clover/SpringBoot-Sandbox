@@ -6,6 +6,7 @@ import com.practice.Sandbox.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -43,4 +44,9 @@ public class InventoryItemController {
   // update by id
 
   // delete
+  @DeleteMapping("/{id}")
+  public ResponseEntity<InventoryItem> deleteInventoryItem(@PathVariable Long id) {
+    inventoryItemService.deleteInventoryItem(id);
+    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+  }
 }

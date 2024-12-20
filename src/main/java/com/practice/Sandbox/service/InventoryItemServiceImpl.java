@@ -23,12 +23,17 @@ public class InventoryItemServiceImpl implements InventoryItemService {
 
   @Override
   public List<InventoryItem> getInventoryItems() {
-    return (List<InventoryItem>)inventoryItemRepository.findAll();
+    return (List<InventoryItem>) inventoryItemRepository.findAll();
   }
 
   @Override
   public InventoryItem saveInventoryItem(InventoryItem inventoryItem) {
     return inventoryItemRepository.save(inventoryItem);
+  }
+
+  @Override
+  public void deleteInventoryItem(Long id) {
+    inventoryItemRepository.deleteById(id);
   }
 
   static InventoryItem unwrapInventoryItem(Optional<InventoryItem> entity, Long id) {

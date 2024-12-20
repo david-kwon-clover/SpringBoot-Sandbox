@@ -6,7 +6,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -40,13 +42,14 @@ public class InventoryItem {
   @Column(name = "img")
   private String imgUrl;
 
-  @NotBlank(message = "quantity cannot be blank")
+  @NotNull(message = "quantity cannot be blank")
   @NonNull
   @Column(name = "quantity")
   private int quantity;
 
-  @NotBlank(message = "unit price cannot be blank")
+  @NotNull(message = "unit price cannot be null")
   @NonNull
+  @DecimalMin(value = "0.01", message = "Unit price must be at least 0.01")
   @Column(name = "unitPrice")
   private BigDecimal unitPrice;
 
