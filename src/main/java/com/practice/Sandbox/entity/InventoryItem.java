@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -49,6 +50,7 @@ public class InventoryItem {
   @Column(name = "category")
   private String category;
 
+  @UpdateTimestamp
   @Column(name = "updated_at")
   private LocalDateTime updatedAt;
 }
