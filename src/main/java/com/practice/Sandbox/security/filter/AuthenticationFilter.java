@@ -26,6 +26,5 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     } catch (IOException e) {
       throw new RuntimeException();
     }
-    return super.attemptAuthentication(request, response);
   }
 }
