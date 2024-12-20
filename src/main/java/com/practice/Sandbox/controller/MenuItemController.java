@@ -33,19 +33,16 @@ public class MenuItemController {
     return new ResponseEntity<>(menuItemService.getAllMenuItems(), HttpStatus.OK);
   }
 
-  // create
   @PostMapping
   public ResponseEntity<MenuItem> createMenuItem(@RequestBody MenuItem menuItem) {
     return new ResponseEntity<>(menuItemService.saveMenuItem(menuItem), HttpStatus.CREATED);
   }
 
-  // update by id
   @PutMapping("/{id}")
   public ResponseEntity<MenuItem> updateMenuItem(@PathVariable Long id, @RequestBody MenuItem menuItem) {
     return new ResponseEntity<>(menuItemService.updateMenuItem(id, menuItem), HttpStatus.OK);
   }
 
-  // delete
   @DeleteMapping("/{id}")
   public ResponseEntity<MenuItem> deleteMenuItem(@PathVariable Long id) {
     menuItemService.deleteMenuItem(id);

@@ -39,8 +39,8 @@ public class InventoryItem {
 
   @NotBlank(message = "image url cannot be blank")
   @NonNull
-  @Column(name = "img")
-  private String imgUrl;
+  @Column(name = "image")
+  private String imageUrl;
 
   @NotNull(message = "quantity cannot be blank")
   @Column(name = "quantity")

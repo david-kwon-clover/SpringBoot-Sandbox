@@ -1,5 +1,6 @@
 package com.practice.Sandbox.entity;
 
+import com.practice.Sandbox.entity.constants.OrderStatus;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,46 +16,38 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @RequiredArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @Entity
-@Table(name = "menu_item")
-public class MenuItem {
+@Table(name = "order")
+public class Order {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id")
   private Long id;
 
-  @NotBlank(message = "name cannot be blank")
+  @NotBlank(message = "customer name cannot be blank")
   @NonNull
-  @Column(name = "name")
-  private String name;
+  @Column(name = "customer_name")
+  private String customerName;
 
-  @NotBlank(message = "image url cannot be blank")
+  @NotNull(message = "order date cannot be null")
   @NonNull
-  @Column(name = "image")
-  private String imageUrl;
+  @Column(name = "order_date")
+  private LocalDateTime orderDate;
 
-  @NotBlank(message = "description cannot be blank")
+  @NotNull(message = "order status cannot be blank")
   @NonNull
-  @Column(name = "description")
-  private String description;
+  @Column(name = "order_status")
+  private OrderStatus orderStatus;
 
-  @NotNull(message = "price cannot be null")
-  @Column(name = "price")
-  private BigDecimal price;
-
-  @NotBlank(message = "category cannot be blank")
+  @NotNull(message = "total cannot be null")
   @NonNull
-  @Column(name = "category")
-  private String category;
-
-  @NotNull(message = "availability cannot be null")
-  @Column(name = "available")
-  private Boolean available;
-
+  @Column(name = "total")
+  private BigDecimal total;
 }
