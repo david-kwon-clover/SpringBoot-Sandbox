@@ -20,7 +20,7 @@ public class SecurityConfig {
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     AuthenticationFilter authenticationFilter = new AuthenticationFilter(customAuthenticationManager);
-    authenticationFilter.setFilterProcessesUrl("user/login");
+    authenticationFilter.setFilterProcessesUrl("/authenticate");
     http
         .csrf(csrf -> csrf.disable())
         .headers((headers) -> headers
@@ -28,7 +28,7 @@ public class SecurityConfig {
         )
         .authorizeHttpRequests((authorize) -> authorize
             .requestMatchers("/h2/**").permitAll()
-            .requestMatchers("user/signup").permitAll()
+            .requestMatchers("/user/signup").permitAll()
             .anyRequest().authenticated()
         )
         .addFilterBefore(new ExceptionHandlerFilter(), AuthenticationFilter.class)
